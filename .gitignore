@@ -1,0 +1,16 @@
+# PYTHON
+__pycache__/
+__pycache__/*
+target/
+
+# idea
+.idea/
+**/*.swo
+**/*.swp
+
+# venv
+venv/
+
+# production
+prod.env
+docker-compose-prod.yml

@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  backend:
+    restart: always
+    build:
+      context: ./tg_api/
+      dockerfile: Dockerfile
+    env_file:
+      - debug.env
+    networks:
+     - vote_mipt
+    image: "mipt_vote/back:v1"
+    container_name: mipt_vote_backend_v1
+    ports:
+      - "80:80"
+    volumes:
+      - ./tg_api:/usr/src/app
+
+  tg_bot:
+    restart: always
+    build:
+      context: ./tg_vote/
+      dockerfile: Dockerfile
+    env_file:
+      - debug.env
+    networks:
+      - vote_mipt
+    image: "mipt_vote/tg_bot:v1"
+    container_name: mipt_vote_tg_bot_v1
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./tg_vote:/usr/src/app
+
+networks:
+  vote_mipt:
+    name: vote_mipt
