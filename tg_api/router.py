@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
-
+from fastapi_admin.app import app
+from fastapi_admin.resources import Link
 from repository import StudentRepository, PoolRepository, AnswerRepository
 from schemas import \
     SStudentAdd, SStudentId, SStudent, \
@@ -11,6 +12,13 @@ router = APIRouter(
     prefix="/api",
     tags=["Опросы"],
 )
+
+
+@app.register
+class Home(Link):
+    label = "Home"
+    icon = "fas fa-home"
+    url = "/admin"
 
 
 @router.post(

@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-
+from fastapi_admin.app import app as admin_app
 from fastapi import FastAPI
 from database import create_tables, delete_tables
 
@@ -14,5 +14,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.mount("/admin", admin_app)
 
 app.include_router(tasks_router)
